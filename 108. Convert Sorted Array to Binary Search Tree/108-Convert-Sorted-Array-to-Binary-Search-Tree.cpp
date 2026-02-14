@@ -1,0 +1,18 @@
+class Solution {
+public:
+    TreeNode* sortedArrayToBST(vector<int>& nums) {
+        int left = 0;
+        int right = nums.size() - 1;
+        return BinarySearchTree(left, right, nums);
+    }
+    TreeNode* BinarySearchTree(int left, int right, vector<int>& nums) 
+   {
+        if(left > right) return nullptr;
+        int mid = left + (right - left) / 2;
+        TreeNode* root = new TreeNode(nums[mid]);
+        root->left = BinarySearchTree(left, mid - 1, nums);
+        root->right = BinarySearchTree(mid+1, right, nums);
+
+        return root;
+    }
+};
